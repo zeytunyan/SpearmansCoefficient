@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Spearman" Class="SpearmanClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Spearman.mdf;Integrated Security=True" SettingsObjectName="Server.Properties.Settings" SettingsPropertyName="SpearmanConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Results" Member="Results">
+    <Type Name="Results">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Coeff" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Concl" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Time" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Results_Variables" Member="Variables" ThisKey="Id" OtherKey="RID" Type="Variables" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Variables" Member="Variables">
+    <Type Name="Variables">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="RID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="X" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Y" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Results_Variables" Member="Results" ThisKey="RID" OtherKey="Id" Type="Results" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
