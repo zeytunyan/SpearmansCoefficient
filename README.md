@@ -21,7 +21,6 @@ It measures the strength and direction of the association between two ranked var
 The formula for calculating the Spearman coefficient:
 
 ![image](https://user-images.githubusercontent.com/47988040/213582984-2c7b91ec-fa2c-4f86-8e7e-cdcc9530b0cc.png)
-
 Here, n= number of data points of the two variables, d<sub>i</sub>= difference in ranks of the “ith” element
 
 The Spearman Coefficient, ⍴, can take a value between +1 to -1 where:
