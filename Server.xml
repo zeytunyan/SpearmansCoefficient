@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Server</name>
+    </assembly>
+    <members>
+        <member name="T:Server.ClientHandler">
+            <summary>The class that handles the client.</summary>
+        </member>
+        <member name="M:Server.ClientHandler.#ctor(System.Net.Sockets.TcpClient)">
+            <summary>Initializes a new instance of the <see cref="T:Server.ClientHandler"/> class.</summary>
+            <param name="tcpClient">The TCP client.</param>
+        </member>
+        <member name="M:Server.ClientHandler.Handle">
+            <summary>
+            Handles the client.
+            Receives data from the client and calculates the Spearman coefficient. Sends it to the client.
+            </summary>
+        </member>
+        <member name="M:Server.ClientHandler.Send(System.String)">
+            <summary>Sends the specified message to a client.</summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Server.ClientHandler.Recieve">
+            <summary>Recieves message from client</summary>
+            <returns>
+            System.String.
+            </returns>
+        </member>
+        <member name="M:Server.ClientHandler.Close">
+            <summary>
+            Closes all disposable objects.
+            </summary>
+        </member>
+        <member name="M:Server.ClientHandler.MakeArr(System.String)">
+            <summary>
+            Creates an array of type int, containing arrays with values to calculate the Spearman coefficient.
+            </summary>
+            <param name="strng">A string with the data from the user.</param>
+            <returns>System.Int32[][].</returns>
+        </member>
+        <member name="M:Server.ClientHandler.InsertToDB(System.String,System.Double,System.String,System.Int32[][])">
+            <summary>Inserts data to database.</summary>
+            <param name="uname">  Username.</param>
+            <param name="res"> Calculated Spearman's coefficient.</param>
+            <param name="concl">Conclusion based on Spearman's coefficient.</param>
+            <param name="qr">  Array with user-entered attributes .</param>
+        </member>
+        <member name="T:Server.Row">
+            <summary>The class reflects the row in the table for calculating the Spearman's coefficient</summary>
+        </member>
+        <member name="T:Server.Spearman">
+            <summary>The class that calculates the Spearman's coefficient and gives the results.</summary>
+        </member>
+        <member name="F:Server.Spearman.table">
+            <summary>The table for coefficient calculating.</summary>
+        </member>
+        <member name="P:Server.Spearman.Result">
+            <summary>  Spearman's coefficient.</summary>
+            <value>The result.</value>
+        </member>
+        <member name="M:Server.Spearman.#ctor(System.Int32[],System.Int32[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Server.Spearman"/> class.
+            Creates a table and calculates a coefficient.
+            </summary>
+            <param name="x">The x attributes.</param>
+            <param name="y">The y attributes.</param>
+        </member>
+        <member name="M:Server.Spearman.Conclusion">
+            <summary>Makes a conclusion about the correlation based on the calculated coefficient.</summary>
+            <returns>
+            System.String.
+            Conclusion
+            </returns>
+        </member>
+        <member name="M:Server.Spearman.SortingX(Server.Row[])">
+            <summary>Sortings by x.</summary>
+            <param name="arr">The array with x attributes.</param>
+        </member>
+        <member name="M:Server.Spearman.SortingY(Server.Row[])">
+            <summary>Sortings by y.</summary>
+            <param name="arr">The array with y attributes.</param>
+        </member>
+        <member name="M:Server.Spearman.Sort_By_X(Server.Row,Server.Row)">
+            <summary>  Rule for sorting by x.</summary>
+            <param name="r1">The row.</param>
+            <param name="r2">The row.</param>
+            <returns>System.Int32.</returns>
+        </member>
+        <member name="M:Server.Spearman.Sort_By_Y(Server.Row,Server.Row)">
+            <summary>  Rule for sorting by y.</summary>
+            <param name="r1">The row.</param>
+            <param name="r2">The row.</param>
+            <returns>System.Int32.</returns>
+        </member>
+        <member name="M:Server.Spearman.Rank(System.Int32[])">
+            <summary>Ranks the specified array according to the ranking rules for the Spearman's coefficient.</summary>
+            <param name="array">The array to rank.</param>
+            <returns>System.Double[].
+            Ranks</returns>
+        </member>
+    </members>
+</doc>
