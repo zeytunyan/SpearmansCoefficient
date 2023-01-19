@@ -11,7 +11,6 @@ The server performs calculations for each client in a separate thread.
 
 Attached scripts for creating database tables.
 
----
 
 ## About Spearman's coefficient
 
@@ -20,6 +19,7 @@ Named after Charles Spearman, it is often denoted by the Greek letter ‘ρ’ (
 It measures the strength and direction of the association between two ranked variables.
 
 The formula for calculating the Spearman coefficient:
+
 ![image](https://user-images.githubusercontent.com/47988040/213582984-2c7b91ec-fa2c-4f86-8e7e-cdcc9530b0cc.png)
 
 Here,
