@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Net;
 using System.Security.Principal;
+using Network;
 
 namespace Client
 {
@@ -92,14 +93,14 @@ namespace Client
                 yValues[i] = TxtBox.Text;
             }
 
-            string message = String.Join(",", xValues) + "|" + String.Join(",", yValues);
+            string message = string.Join(",", xValues) + "|" + string.Join(",", yValues);
             string name = WindowsIdentity.GetCurrent().Name;
 
-            ClientObject clientObject = new ClientObject(IPAddress.Loopback, 8001);
-            clientObject.Send(message);
-            clientObject.Send(name);
-            string answer = clientObject.Recieve();
-            clientObject.Close();
+            var clientWrapper = new TcpClientWrapper(IPAddress.Loopback, 8001);
+            clientWrapper.Send(message);
+            clientWrapper.Send(name);
+            string answer = clientWrapper.Recieve();
+            clientWrapper.Close();
 
             Controls.Clear();
             this.Width = 500;

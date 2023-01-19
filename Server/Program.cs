@@ -22,7 +22,6 @@ namespace Server
                 {
                     TcpClient client = listener.AcceptTcpClient();
                     ClientHandler handler = new ClientHandler(client);
-
                     // Processing each client in a separate thread
                     Thread clientThread = new Thread(new ThreadStart(handler.Handle));
                     clientThread.Start();

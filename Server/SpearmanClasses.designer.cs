@@ -22,7 +22,7 @@ namespace Server
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Spearman")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="SpearmanRealization")]
 	public partial class SpearmanClassesDataContext : System.Data.Linq.DataContext
 	{
 		
