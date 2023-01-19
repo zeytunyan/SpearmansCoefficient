@@ -22,15 +22,12 @@ The formula for calculating the Spearman coefficient:
 
 ![image](https://user-images.githubusercontent.com/47988040/213582984-2c7b91ec-fa2c-4f86-8e7e-cdcc9530b0cc.png)
 
-Here,
+Here, n= number of data points of the two variables, d<sub>i</sub>= difference in ranks of the “ith” element
 
-n= number of data points of the two variables
+The Spearman Coefficient, ⍴, can take a value between +1 to -1 where,
 
-d<sub>i</sub>= difference in ranks of the “ith” element
-
-The Spearman Coefficient,⍴, can take a value between +1 to -1 where,
-
-A ⍴ value of +1 means a perfect association of rank
-A ⍴ value of 0 means no association of ranks
-A ⍴ value of -1 means a perfect negative association between ranks.
+* A ⍴ value of +1 means a perfect association of rank
+* A ⍴ value of 0 means no association of ranks
+* A ⍴ value of -1 means a perfect negative association between ranks.
+* 
 Closer the ⍴ value to 0, weaker is the association between the two ranks.
