@@ -34,8 +34,7 @@ namespace Server
             }
             finally
             {
-                if (listener != null)
-                    listener.Stop();
+                 listener?.Stop();
             }
         }
     }
