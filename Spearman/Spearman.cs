@@ -14,8 +14,12 @@ namespace Spearman
         /// <value>The result.</value>
         public double Result{ get; private set; }
 
+        /// <summary>Conclusion about the correlation based on the calculated coefficient.</summary>
+        /// <value>The conclusion.</value>
+        public string Conclusion => $"{Result} => {(Result == 0 ? "Корреляция отсутствует" : DetermineCorrelation())}";
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:Server.SpearmanRealization"/> class.
+        /// Initializes a new instance of the <see cref="T:Spearman.SpearmanRealization"/> class.
         /// Creates a table and calculates a coefficient.
         /// </summary>
         /// <param name="x">The x attributes.</param>
@@ -33,14 +37,14 @@ namespace Spearman
                 table[i].Y = y[i];
             }
 
-            SortingY(table);
+            Array.Sort(table, (r1, r2) => r1.Y.CompareTo(r2.Y));
             double[] rnkY = Rank(y);
             for (int i = 0; i < n; i++)
             {
                 table[i].RY = rnkY[i];
             }
 
-            SortingX(table);
+            Array.Sort(table, (r1, r2) => r1.X.CompareTo(r2.X));
             double[] rnkX = Rank(x);
             for (int i = 0; i < n; i++)
             {
@@ -57,82 +61,25 @@ namespace Spearman
             Result = Math.Round(1 - 6 * (sum / (n * n * n - n)), 3);
         }
 
-        /// <summary>Makes a conclusion about the correlation based on the calculated coefficient.</summary>
-        /// <returns>
-        /// System.String.
-        /// Conclusion
-        /// </returns>
-        public string Conclusion()
-        {
-            string сoncl = Convert.ToString(Result) + " => ";
+
+        private string DetermineCorrelation()
+        {            
+            var resAbs = Math.Abs(Result);
             
-            if (Result == 0)
-            {
-                сoncl += "Корреляция отсутствует";
-            }
-            else
-            {
-                double abs = Math.Abs(Result);
-                if (abs < 0.2)
-                {
-                    сoncl += "Cтатичтическая взаимосвязь очень слабая ";
-                }
-                else if (abs < 0.5)
-                {
-                    сoncl += "Статистическая взаимосвязь слабая ";
-                }
-                else if (abs < 0.7)
-                {
-                    сoncl += "Статистическая взаимосвязь средняя ";
-                }
-                else
-                {
-                    сoncl += "Статистическая взаимосвязь сильная ";
-                }
+            string strength;
+            
+            if (resAbs < 0.2) 
+                strength = "очень слабая";
+            else if 
+                (resAbs < 0.5) strength = "слабая";
+            else if 
+                (resAbs < 0.7) strength = "средняя";
+            else 
+                strength = " сильная ";
 
-                if(Result < 0)
-                {
-                    сoncl += "и обратная.";
-                }
-                else
-                {
-                    сoncl += "и прямая.";
-                }
-            }
-            return сoncl;
-        }
+            return $"Cтатиcтическая взаимосвязь {strength} и { (Result > 0 ? "прямая" : "обратная") }.";
+    }
 
-        /// <summary>Sortings by x.</summary>
-        /// <param name="arr">The array with x attributes.</param>
-        private void SortingX(Row[] arr)
-        {
-            Array.Sort(arr, Sort_By_X);
-        }
-
-        /// <summary>Sortings by y.</summary>
-        /// <param name="arr">The array with y attributes.</param>
-        private void SortingY(Row[] arr)
-        {
-            Array.Sort(arr, Sort_By_Y);
-        }
-
-        /// <summary>  Rule for sorting by x.</summary>
-        /// <param name="r1">The row.</param>
-        /// <param name="r2">The row.</param>
-        /// <returns>System.Int32.</returns>
-        private int Sort_By_X(Row r1, Row r2)
-        {
-            return r1.X.CompareTo(r2.X);
-        }
-
-        /// <summary>  Rule for sorting by y.</summary>
-        /// <param name="r1">The row.</param>
-        /// <param name="r2">The row.</param>
-        /// <returns>System.Int32.</returns>
-        private int Sort_By_Y(Row r1, Row r2)
-        {
-            return r1.Y.CompareTo(r2.Y);
-        }
 
         /// <summary>Ranks the specified array according to the ranking rules for the SpearmanRealization's coefficient.</summary>
         /// <param name="array">The array to rank.</param>
@@ -142,61 +89,44 @@ namespace Spearman
         {
             int[] mas = new int[array.Length];
             double[] rank = new double[array.Length];
-            List<int[]> list = new List<int[]>();
-            int start = 0;
-            int end = 0;
-            bool flag = false;
+            var list = new List<(int Start, int End)>();
+            var (flag, start) = (false, 0);
 
             Array.Copy(array, mas, mas.Length);
             Array.Sort(mas);
 
             for (int i = 0; i < array.Length - 1; i++)
             {
-                if (mas[i] == mas[i + 1])
+                if (mas[i] != mas[i + 1] && !flag) 
+                    rank[i] = Convert.ToDouble(i + 1);
+               
+                if (mas[i] == mas[i + 1] && !flag) 
+                    (flag, start) = (true, i);
+
+                if (mas[i] != mas[i + 1])
                 {
-                    if (!flag)
-                    {
-                        start = i;
-                        flag = true;
-                    }
-                }
-                else
-                {
-                    if (flag)
-                    {
-                        end = i;
-                        int[] intA = { start, end };
-                        list.Add(intA);
-                        flag = false;
-                    }
-                    else
-                    {
-                        rank[i] = Convert.ToDouble(i + 1);
-                    }
+                    list.Add((start, i));
+                    flag = false;
                 }
             }
 
             if (mas[mas.Length - 1] == mas[mas.Length - 2])
             {
-                end = mas.Length - 1;
-                int[] intA = { start, end };
-                list.Add(intA);
+                list.Add((start, mas.Length - 1));
             }
             else
             {
                 rank[mas.Length - 1] = Convert.ToDouble(mas.Length);
             }
 
-            for (int i = 0; i < list.Count; i++)
+            foreach (var tuple in list)
             {
-                int n = list[i][1] - list[i][0] + 1;
-                double rnk = Convert.ToDouble(((list[i][0] + list[i][1] + 2) * n)) / (2 * n);
-
-                for (int k = list[i][0]; k <= list[i][1]; k++)
+                for (int k = tuple.Start; k <= tuple.End; k++)
                 {
-                    rank[k] = rnk;
+                    rank[k] = (tuple.Start + tuple.End) / 2 + 1;
                 }
             }
+
             return rank;
         }
     }

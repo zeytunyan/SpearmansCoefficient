@@ -7,10 +7,10 @@ using Network;
 
 namespace Client
 {
-    public partial class Spearman_Form : Form
+    public partial class SpearmanForm : Form
     {
         /// <summary>Initializes a new instance of the <see cref="T:Client.Spearman_Form"/> class.</summary>
-        public Spearman_Form()
+        public SpearmanForm()
         {
             InitializeComponent();
         }

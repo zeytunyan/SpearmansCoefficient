@@ -28,7 +28,7 @@ namespace Server
             string username = clientWrapper.Recieve();
 
             var spearman = new SpearmanRealization(query[0], query[1]);
-            string conclusion = spearman.Conclusion();
+            string conclusion = spearman.Conclusion;
 
             clientWrapper.Send(conclusion);
             clientWrapper.Close();

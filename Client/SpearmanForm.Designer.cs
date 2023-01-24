@@ -1,6 +1,6 @@
 ﻿namespace Client
 {
-    partial class Spearman_Form
+    partial class SpearmanForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.

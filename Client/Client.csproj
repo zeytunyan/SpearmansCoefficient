@@ -47,16 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Spearman_Form.cs">
+    <Compile Include="SpearmanForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Spearman_Form.Designer.cs">
-      <DependentUpon>Spearman_Form.cs</DependentUpon>
+    <Compile Include="SpearmanForm.Designer.cs">
+      <DependentUpon>SpearmanForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Spearman_Form.resx">
-      <DependentUpon>Spearman_Form.cs</DependentUpon>
+    <EmbeddedResource Include="SpearmanForm.resx">
+      <DependentUpon>SpearmanForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
